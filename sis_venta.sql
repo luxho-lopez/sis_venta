@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2022 a las 05:28:47
+-- Tiempo de generación: 22-04-2022 a las 06:07:18
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -44,9 +44,10 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idcliente`, `nombre`, `apellido`, `telefono`, `direccion`, `colonia`, `ciudad`, `usuario_id`, `estado`) VALUES
-(1, 'VENTA EN BODEGA', ' ', '9323233014', 'CALLE DOCTOR BELISARIO DOMINGUEZ 15', 'COLONIA CENTRO ', 'PICHUCALCO, CHIAPAS.', 1, 1),
-(4, 'LUIS FERNANDO', 'RAMOS SOLIS', '9321694856', 'CALLE LAS ROSAS S/N', 'COLONIA EL JARDIN', 'JUAREZ, CHIAPAS.', 3, 1),
-(8, 'DASH', 'BERLIN', '987654321', 'CALLE 5 S/N', 'COLONIA EL MIRADOR', 'PICHUCALCO, CHIAPAS.', 3, 1);
+(1, 'VENTA EN BODEGA', ' ', '9323233014', 'CALLE DOCTOR BELISARIO DOMINGUEZ 15', 'CENTRO ', 'PICHUCALCO', 1, 1),
+(4, 'FERNANDO', 'RAMOS SOLIS', '123456789', 'CALLE LAS ROSAS S/N', 'EL JARDIN', 'JUAREZ', 3, 1),
+(8, 'DARIO', 'LOPEZ CARSO', '1324567890', 'CALLE 5 S/N', 'EL MIRADOR', 'PICHUCALCO', 3, 1),
+(9, 'LILIANA ESTEFANNI', 'SANCHEZ LOPEZ', '1234567890', 'CALLE 10 S/N', 'EL MIRADOR', 'PICHUCALCO', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id`, `nombre`, `telefono`, `email`, `direccion`) VALUES
-(1, 'Comercializadora Arzat', '9323233014', 'arzat@hotmail.com', 'CALLE DOCTOR BELISARIO DOMINGUEZ 15. COLONIA CENTRO 29520. PICHUCALCO, CHIAPAS. MEXICO.');
+(1, 'COMERCIALIZADORA ARZAT', '9321694856', 'dj_97@hotmail.com', 'CALLE PRINCIPAL 15. COLONIA CENTRO 29520. PICHUCALCO, CHIAPAS. MEXICO.');
 
 -- --------------------------------------------------------
 
@@ -143,7 +144,8 @@ INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `cantidad`, `preci
 (11, 8, 7, 8, '9800.00'),
 (12, 9, 8, 1, '5200.00'),
 (13, 9, 9, 1, '5200.00'),
-(14, 7, 11, 1, '6800.00');
+(14, 7, 11, 1, '6800.00'),
+(15, 10, 12, 1, '5000.00');
 
 -- --------------------------------------------------------
 
@@ -201,7 +203,6 @@ CREATE TABLE `producto` (
   `codigo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `factura` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `existencia` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
@@ -211,10 +212,11 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `factura`, `existencia`, `usuario_id`, `estado`) VALUES
-(7, 'SETCLF120D', 'MINI SPLIT MIRAGE 12,000 BTUS 220 VOLTIOS SERIE LIFE 12', '6800.00', 'OT43085', 18, 3, 1),
-(8, 'MFCD09P2NABW', 'CONGELADOR MIDEA 9 PIES, BLANCO DUAL', '9800.00', 'OT46439', 27, 3, 1),
-(9, '32H5G', 'TELEVISOR LED HISENSE 32 PULGADAS, VIDAA SMART TV, HIGH DEFINITION, USB, HDMI', '5200.00', 'ICACW778383', 0, 3, 1);
+INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `existencia`, `usuario_id`, `estado`) VALUES
+(7, 'SETCLF120D', 'MINI SPLIT MIRAGE 12,000 BTUS 220 VOLTIOS SERIE LIFE 12', '6800.00', 18, 3, 1),
+(8, 'MFCD09P2NABW', 'CONGELADOR MIDEA 9 PIES, BLANCO DUAL', '9800.00', 27, 3, 1),
+(9, '32H5G', 'TELEVISOR LED HISENSE 32 PULGADAS, VIDAA SMART TV, HIGH DEFINITION, USB, HDMI', '5300.00', 12, 3, 1),
+(10, 'NAW1001S', 'ESTUFA ACROS 20 PULGADAS NEGRO-ACERO, ENCENDIDO MANUAL', '5000.00', 7, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -237,8 +239,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `nombre`, `apellido`, `correo`, `usuario`, `clave`, `estado`) VALUES
-(3, 'LUIS ALFREDO', 'LOPEZ CRUZ', 'dj_97@outlook.com', 'alfredo', '202cb962ac59075b964b07152d234b70', 1),
-(4, 'ANGEL', 'ARZAT', 'arzat@hotmail.com', 'angel', '202cb962ac59075b964b07152d234b70', 1);
+(3, 'ALFREDO', 'LOPEZ ALVAREZ', 'dj_97@outlook.com', 'ADMIN', '73acd9a5972130b75066c82595a1fae3', 1);
 
 -- --------------------------------------------------------
 
@@ -266,7 +267,8 @@ INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
 (8, 1, '5200.00', 3, '2022-02-13 23:39:22'),
 (9, 4, '5200.00', 3, '2022-02-13 23:59:05'),
 (10, 4, '0.00', 3, '2022-02-13 23:59:10'),
-(11, 8, '6800.00', 3, '2022-02-14 00:02:16');
+(11, 8, '6800.00', 3, '2022-02-14 00:02:16'),
+(12, 9, '5000.00', 3, '2022-04-22 03:47:37');
 
 --
 -- Índices para tablas volcadas
@@ -340,7 +342,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -358,13 +360,13 @@ ALTER TABLE `detalle_permisos`
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
@@ -382,7 +384,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `codproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `codproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -394,7 +396,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

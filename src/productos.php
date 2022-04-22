@@ -10,12 +10,11 @@
     if (!empty($_POST)) {
         $codigo = $_POST['codigo'];
         $producto = $_POST['producto'];
-        $factura = $_POST['factura'];
         $precio = $_POST['precio'];
         $cantidad = $_POST['cantidad'];
         $usuario_id = $_SESSION['idUser'];
         $alert = "";
-        if (empty($codigo) || empty($producto) || empty($factura) || empty($precio) || $precio <  0 || empty($cantidad) || $cantidad < 0) {
+        if (empty($codigo) || empty($producto) || empty($precio) || $precio <  0 || empty($cantidad) || $cantidad < 0) {
             $alert = '<div class="alert alert-danger" role="alert">
                 Todo los campos son obligatorios
               </div>';
@@ -27,7 +26,7 @@
                         El código ya existe
                     </div>';
             } else {
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,factura,precio,existencia,usuario_id) values ('$codigo', '$producto', '$factura', '$precio','$cantidad','$usuario_id')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,existencia,usuario_id) values ('$codigo', '$producto', '$precio','$cantidad','$usuario_id')");
                 if ($query_insert) {
                     $alert = '<div class="alert alert-success" role="alert">
                 Producto Registrado
@@ -48,9 +47,8 @@
         <thead class="thead-dark">
             <tr>
                 <!-- <th>#</th> -->
-                <th>Modelo</th>
+                <th>Código</th>
                 <th>Producto</th>
-                <th>Factura</th>
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Estado</th>
@@ -75,7 +73,6 @@
 
                         <td><?php echo $data['codigo']; ?></td>
                         <td><?php echo $data['descripcion']; ?></td>
-                        <td><?php echo $data['factura']; ?></td>
                         <td><?php echo $data['precio']; ?></td>
                         <td><?php echo $data['existencia']; ?></td>
                         <td><?php echo $estado ?></td>
@@ -116,10 +113,6 @@
                     <div class="form-group">
                         <label for="producto">Producto</label>
                         <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="factura">Factura</label>
-                        <input type="text" placeholder="Ingrese numero de factura" name="factura" id="factura" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="precio">Precio</label>

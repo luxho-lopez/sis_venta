@@ -21,7 +21,7 @@ if (empty($_GET['id'])) {
 if (!empty($_POST)) {
     $alert = "";
     if (!empty($_POST['cantidad']) || !empty($_POST['precio']) || !empty($_POST['producto_id'])) {
-        $precio = $_POST['precio'];
+        // $precio = $_POST['precio'];
         $cantidad = $_POST['cantidad'];
         $producto_id = $_GET['id'];
         $total = $cantidad + $data_producto['existencia'];
@@ -62,7 +62,7 @@ if (!empty($_POST)) {
                     </div>
                     <div class="form-group">
                         <label for="precio">Precio</label>
-                        <input type="text" placeholder="Ingrese nombre del precio" name="precio" class="form-control" value="<?php echo $data_producto['precio']; ?>">
+                        <input type="text" placeholder="Ingrese nombre del precio" name="precio" class="form-control" value="<?php echo $data_producto['precio']; ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="cantidad">Agregar Cantidad</label>

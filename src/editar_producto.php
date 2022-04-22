@@ -10,7 +10,7 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_POST)) {
   $alert = "";
-  if (empty($_POST['codigo']) || empty($_POST['producto']) || empty($_POST['factura']) || empty($_POST['precio'])) {
+  if (empty($_POST['codigo']) || empty($_POST['producto']) || empty($_POST['precio'])) {
     $alert = '<div class="alert alert-primary" role="alert">
               Todo los campos son requeridos
             </div>';
@@ -18,9 +18,8 @@ if (!empty($_POST)) {
     $codproducto = $_GET['id'];
     $codigo = $_POST['codigo'];
     $producto = $_POST['producto'];
-    $factura = $_POST['factura'];
     $precio = $_POST['precio'];
-    $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', factura = '$factura', precio= $precio WHERE codproducto = $codproducto");
+    $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio WHERE codproducto = $codproducto");
     if ($query_update) {
       $alert = '<div class="alert alert-primary" role="alert">
               Producto Modificado
@@ -69,12 +68,6 @@ if (empty($_REQUEST['id'])) {
           <div class="form-group">
             <label for="producto">Producto</label>
             <input type="text" class="form-control" placeholder="Ingrese nombre del producto" name="producto" id="producto" value="<?php echo $data_producto['descripcion']; ?>">
-          </div>
-
-          <div class="form-group">
-            <label for="factura">Factura</label>
-            <input type="text" class="form-control" placeholder="Ingrese numero de factura" name="factura" id="factura" value="<?php echo $data_producto['factura']; ?>">
-
           </div>
           <div class="form-group">
             <label for="precio">Precio</label>
