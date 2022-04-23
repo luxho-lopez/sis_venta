@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2022 a las 06:07:18
+-- Tiempo de generación: 23-04-2022 a las 05:59:12
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -116,6 +116,13 @@ CREATE TABLE `detalle_temp` (
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `detalle_temp`
+--
+
+INSERT INTO `detalle_temp` (`id`, `id_usuario`, `id_producto`, `cantidad`, `precio_venta`, `total`) VALUES
+(48, '3', 9, 1, '5300.00', 5300);
+
 -- --------------------------------------------------------
 
 --
@@ -146,27 +153,6 @@ INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `cantidad`, `preci
 (13, 9, 9, 1, '5200.00'),
 (14, 7, 11, 1, '6800.00'),
 (15, 10, 12, 1, '5000.00');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `inventario`
---
-
-CREATE TABLE `inventario` (
-  `id` int(11) NOT NULL,
-  `id_codproducto` int(11) NOT NULL,
-  `serie` varchar(50) NOT NULL,
-  `iestado` int(11) NOT NULL,
-  `fecha` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `inventario`
---
-
-INSERT INTO `inventario` (`id`, `id_codproducto`, `serie`, `iestado`, `fecha`) VALUES
-(1, 8, '341B703780111131010300', 1, '2022-02-16');
 
 -- --------------------------------------------------------
 
@@ -215,7 +201,7 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `existencia`, `usuario_id`, `estado`) VALUES
 (7, 'SETCLF120D', 'MINI SPLIT MIRAGE 12,000 BTUS 220 VOLTIOS SERIE LIFE 12', '6800.00', 18, 3, 1),
 (8, 'MFCD09P2NABW', 'CONGELADOR MIDEA 9 PIES, BLANCO DUAL', '9800.00', 27, 3, 1),
-(9, '32H5G', 'TELEVISOR LED HISENSE 32 PULGADAS, VIDAA SMART TV, HIGH DEFINITION, USB, HDMI', '5300.00', 12, 3, 1),
+(9, '32H5G', 'TELEVISOR LED HISENSE 32 PULGADAS, VIDAA SMART TV, HIGH DEFINITION, USB, HDMI', '5300.00', 0, 3, 1),
 (10, 'NAW1001S', 'ESTUFA ACROS 20 PULGADAS NEGRO-ACERO, ENCENDIDO MANUAL', '5000.00', 7, 3, 1);
 
 -- --------------------------------------------------------
@@ -305,12 +291,6 @@ ALTER TABLE `detalle_venta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `inventario`
---
-ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
@@ -360,19 +340,13 @@ ALTER TABLE `detalle_permisos`
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `inventario`
---
-ALTER TABLE `inventario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

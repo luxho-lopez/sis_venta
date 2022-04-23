@@ -69,7 +69,8 @@ $pdf->SetTextColor(255, 255, 255);
 $pdf->Cell(196, 5, "Detalles del Producto", 1, 1, 'C', 1);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(14, 5, utf8_decode('N°'), 0, 0, 'L');
-$pdf->Cell(110, 5, utf8_decode('Descripción'), 0, 0, 'L');
+$pdf->Cell(85, 5, utf8_decode('Descripción'), 0, 0, 'L');
+$pdf->Cell(25, 5, 'Serie', 0, 0, 'C');
 $pdf->Cell(25, 5, 'Cantidad', 0, 0, 'C');
 $pdf->Cell(22, 5, 'Precio', 0, 0, 'C');
 $pdf->Cell(25, 5, 'Sub Total.', 0, 1, 'C');
@@ -80,7 +81,9 @@ $contador = 1;
 while ($row = mysqli_fetch_assoc($ventas)) {
     $pdf->Cell(14, 5, $contador, 0, 0, 'L');
     
-    $pdf->Cell(110, 5, $row['descripcion'], 1, 0, 'L' );
+    $pdf->Cell(85, 5, $row['descripcion'], 1, 0, 'L' );
+    // En este van los numero de series. le puce cantidad para que no muestre error
+    $pdf->Cell(25, 5, $row['cantidad'], 1, 0, 'L' );
     
     $pdf->Cell(25, 5, $row['cantidad'], 0, 0, 'C');
     $pdf->Cell(22, 5, $row['precio'], 0, 0, 'R');
