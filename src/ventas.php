@@ -72,6 +72,7 @@ if (empty($existe) && $id_user != 1) {
                             <label><i class="fas fa-user"></i> VENDEDOR</label>
                             <p style="font-size: 16px; text-transform: uppercase; color: red;">
                                 <?php echo $_SESSION['nombre']; ?>
+                                <?php echo $_SESSION['apellido']; ?>
                             </p>
                         </div>
                     </div>
@@ -102,7 +103,7 @@ if (empty($existe) && $id_user != 1) {
                         <th>Cantidad</th>
                         <th>Precio</th>
                         <th>Precio Total</th>
-                        <th>Accion</th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody id="detalle_venta">

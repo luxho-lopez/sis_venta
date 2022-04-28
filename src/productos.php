@@ -52,7 +52,7 @@
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Estado</th>
-                <th>Acción</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

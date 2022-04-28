@@ -58,10 +58,14 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
                             Productos
                         </a>
-                        <!-- <a class="nav-link" href="inventario.php">
+                        <a class="nav-link" href="proveedor.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
-                            Inventario
-                        </a> -->
+                            Proveedor
+                        </a>
+                        <a class="nav-link" href="marca.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+                            Marcas
+                        </a>
                         <a class="nav-link" href="usuarios.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Usuarios
