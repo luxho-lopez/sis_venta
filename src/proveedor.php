@@ -57,7 +57,7 @@
                 <th>Suc. Banco</th>
                 <th>Cuenta</th>
                 <th>Referencia</th>
-                <th>Estado</th>
+                <!-- <th>Estado</th> -->
                 <th></th>
             </tr>
         </thead>
@@ -84,7 +84,7 @@
                         <td><?php echo $data['suc_bank']; ?></td>
                         <td><?php echo $data['account_bank']; ?></td>
                         <td><?php echo $data['ref_bank']; ?></td>
-                        <td><?php echo $estado ?></td>
+                        <!-- <td><?php echo $estado ?></td> -->
                         <td>
                             <?php if ($data['estado'] == 1) { ?>
                                 

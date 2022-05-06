@@ -53,7 +53,7 @@
                 <!-- <th>#</th> -->
                 <th>Marca</th>
                 <th>Logotipo</th>
-                <th>Estado</th>
+                <!-- <th>Estado</th> -->
                 <th> </th>
             </tr>
         </thead>
@@ -76,7 +76,7 @@
                         <td><?php echo $data['marca']; ?></td>
                         <td><img src="../assets/img/<?php echo $data['logo']; ?>" alt="Logotipo" height="50"></td>
 
-                        <td><?php echo $estado ?></td>
+                        <!-- <td><?php echo $estado ?></td> -->
                         <td>
                             <?php if ($data['estado'] == 1) { ?>
 

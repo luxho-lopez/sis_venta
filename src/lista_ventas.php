@@ -8,13 +8,15 @@ $existe = mysqli_fetch_all($sql);
 if (empty($existe) && $id_user != 1) {
     header("Location: permisos.php");
 }
+// $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre, c.apellido FROM ventas v INNER JOIN cliente c ON v.id_cliente = c.idcliente");
+// $query = mysqli_query($conexion, "SELECT dv.*, p.codproducto, p.descripcion, p.codigo FROM detalle_venta dv INNER JOIN producto p ON dv.id_producto = p.codproducto");
 $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre, c.apellido FROM ventas v INNER JOIN cliente c ON v.id_cliente = c.idcliente");
 ?>
 <table class="table table-light" id="tbl">
     <thead class="thead-dark">
         <tr>
             <!-- <th>#</th> -->
-            <th>Cliente</th>
+            <th>Nombre</th>
             <th>Apellido</th>
             <th>Total</th>
             <th>Fecha</th>

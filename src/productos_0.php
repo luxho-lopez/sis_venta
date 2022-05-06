@@ -41,7 +41,6 @@
     }
     ?>
 <button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fas fa-plus"></i></button>
-<a href="productos_0.php"><button class="btn btn-info mb-2" type="button" ><i class="fas fa-audio-description"></i></button></a>
 <?php echo isset($alert) ? $alert : ''; ?>
 <div class="table-responsive">
     <table class="table table-striped table-bordered" id="tbl">
@@ -59,7 +58,7 @@
             <?php
             include "../conexion.php";
 
-            $query = mysqli_query($conexion, "SELECT * FROM producto WHERE existencia != 0");
+            $query = mysqli_query($conexion, "SELECT * FROM producto WHERE existencia = 0");
             $result = mysqli_num_rows($query);
             if ($result > 0) {
                 while ($data = mysqli_fetch_assoc($query)) {
@@ -77,13 +76,13 @@
                         <td><?php echo $data['existencia']; ?></td>
                         <!-- <td><?php echo $estado ?></td> -->
                         <td>
-                            <?php if ($data['existencia'] != 0) { ?>
+                            <?php if ($data['existencia'] == 0) { ?>
                                 <a href="agregar_producto.php?id=<?php echo $data['codproducto']; ?>" class="btn btn-primary btn-sm"><i class='fas fa-audio-description'></i></a>
 
-                                <a href="editar_producto.php?id=<?php echo $data['codproducto']; ?>" class="btn btn-success btn-sm"><i class='fas fa-edit'></i></a>
+                                <!-- <a href="editar_producto.php?id=<?php echo $data['codproducto']; ?>" class="btn btn-success btn-sm"><i class='fas fa-edit'></i></a>
 
                                 <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button>
+                                    <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button> -->
                                 </form>
                             <?php } ?>
                         </td>
