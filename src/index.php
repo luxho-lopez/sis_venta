@@ -4,8 +4,9 @@ $usuarios = mysqli_query($conexion, "SELECT * FROM usuario");
 $totalU= mysqli_num_rows($usuarios);
 $clientes = mysqli_query($conexion, "SELECT * FROM cliente");
 $totalC = mysqli_num_rows($clientes);
-$productos = mysqli_query($conexion, "SELECT * FROM producto");
-$totalP = mysqli_num_rows($productos);
+$consulta = mysqli_query($conexion, "SELECT SUM(existencia) AS totalp FROM producto ");
+$result = mysqli_fetch_assoc($consulta);
+$totalP = $result['totalp'];
 $ventas = mysqli_query($conexion, "SELECT * FROM ventas");
 $totalV = mysqli_num_rows($ventas);
 ?>
