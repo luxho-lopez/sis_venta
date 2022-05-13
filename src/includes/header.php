@@ -27,6 +27,9 @@ if (empty($_SESSION['active'])) {
 
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto">
+            <a style="font-size: small; text-transform: uppercase; color: #D9D8D9; margin-top: 10px">
+                <?php echo $_SESSION['nombre']; ?> <?php echo $_SESSION['apellido']; ?>
+            </a>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -50,7 +53,6 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Clientes
                         </a>
-                        
                         <a class="nav-link" href="lista_ventas.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
                             Ventas
@@ -67,7 +69,6 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
                             Proveedor
                         </a>
-                                                
                         <a class="nav-link" href="usuarios.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Usuarios
@@ -76,7 +77,6 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                             Configuración
                         </a>
-
                     </div>
                 </div>
             </nav>
