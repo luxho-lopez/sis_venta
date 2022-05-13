@@ -9,11 +9,12 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_POST)) {
     $alert = "";
-    if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['clave'])) {
+    if (empty($_POST['cargo']) || empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['clave'])) {
         $alert = '<div class="alert alert-danger" role="alert">
         Todo los campos son obligatorios
         </div>';
     } else {
+        $cargo = $_POST['cargo'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $email = $_POST['correo'];
@@ -26,7 +27,7 @@ if (!empty($_POST)) {
                         El correo ya existe
                     </div>';
         } else {
-            $query_insert = mysqli_query($conexion, "INSERT INTO usuario(nombre,apellido,correo,usuario,clave) values ('$nombre', '$apellido', '$email', '$user', '$clave')");
+            $query_insert = mysqli_query($conexion, "INSERT INTO usuario(cargo, nombre,apellido,correo,usuario,clave) values ('$cargo', '$nombre', '$apellido', '$email', '$user', '$clave')");
             if ($query_insert) {
                 $alert = '<div class="alert alert-primary" role="alert">
                             Usuario registrado
@@ -54,6 +55,10 @@ if (!empty($_POST)) {
             <div class="modal-body">
                 <form action="" method="post" autocomplete="off">
                     <?php echo isset($alert) ? $alert : ''; ?>
+                    <div class="form-group">
+                        <label for="cargo">Cargo</label>
+                        <input type="text" class="form-control" placeholder="Ingrese el cargo" name="cargo" id="cargo">
+                    </div>
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre" name="nombre" id="nombre">
@@ -85,6 +90,7 @@ if (!empty($_POST)) {
         <thead class="thead-dark">
             <tr>
                 <!-- <th>#</th> -->
+                <th>Cargo</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Correo</th>
@@ -109,6 +115,7 @@ if (!empty($_POST)) {
                     }
             ?>
                     <tr>
+                        <td><?php echo $data['cargo']; ?></td>
                         <td><?php echo $data['nombre']; ?></td>
                         <td><?php echo $data['apellido']; ?></td>
                         <td><?php echo $data['correo']; ?></td>

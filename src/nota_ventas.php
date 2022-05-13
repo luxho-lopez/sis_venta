@@ -2,14 +2,13 @@
 include_once "includes/header.php";
 require_once "../conexion.php";
 $id_user = $_SESSION['idUser'];
-$permiso = "ventas";
+$permiso = "notas";
 $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
 $existe = mysqli_fetch_all($sql);
 if (empty($existe) && $id_user != 1) {
     header("Location: permisos.php");
 }
-$query = mysqli_query($conexion, "SELECT dv.*, p.codigo, p.descripcion, c.nombre, c.apellido FROM detalle_venta dv INNER JOIN producto p INNER JOIN ventas v INNER JOIN cliente c ON dv.id_producto = p.codproducto AND dv.id_venta = v.id AND v.id_cliente = c.idcliente");
-
+$query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre, c.apellido FROM ventas v INNER JOIN cliente c ON v.id_cliente = c.idcliente");
 ?>
 <table class="table table-light" id="tbl">
     <thead class="thead-dark">
@@ -18,23 +17,21 @@ $query = mysqli_query($conexion, "SELECT dv.*, p.codigo, p.descripcion, c.nombre
             <th>Fecha</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Producto</th>
-            <th>Código</th>
+            <th>Total</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <?php while ($row = mysqli_fetch_assoc($query)) { ?>
             <tr>
                 <!-- <td><?php echo $row['id']; ?></td> -->
-                
-                <td><?php echo $row['created_at']; ?></td>
+                <td><?php echo $row['fecha']; ?></td>
                 <td><?php echo $row['nombre']; ?></td>
                 <td><?php echo $row['apellido']; ?></td>
-                <td><?php echo $row['descripcion']; ?></td>
-                <td><?php echo $row['codigo']; ?></td>
-                <!-- <td>
+                <td><?php echo $row['total']; ?></td>
+                <td>
                     <a href="pdf/generar.php?cl=<?php echo $row['id_cliente'] ?>&v=<?php echo $row['id'] ?>" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf"></i></a>
-                </td> -->
+                </td>
             </tr>
         <?php } ?>
     </tbody>

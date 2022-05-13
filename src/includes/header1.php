@@ -50,7 +50,6 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Clientes
                         </a>
-                        
                         <a class="nav-link" href="lista_ventas.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
                             Ventas
@@ -67,7 +66,10 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
                             Proveedor
                         </a>
-                                                
+                        <a class="nav-link" href="marca.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-handshake"></i></div>
+                            Marcas
+                        </a>
                         <a class="nav-link" href="usuarios.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Usuarios

@@ -40,17 +40,18 @@
         }
     }
     ?>
-<button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fas fa-plus"></i></button>
+    <br><br>
+<!-- <button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fas fa-plus"></i></button> -->
 <?php echo isset($alert) ? $alert : ''; ?>
 <div class="table-responsive">
     <table class="table table-striped table-bordered" id="tbl">
         <thead class="thead-dark">
             <tr>
                 <!-- <th>#</th> -->
+                <th></th>
                 <th>Código</th>
                 <th>Producto</th>
                 <th>Precio</th>
-                <th>Stock</th>
                 <th>Opción</th>
             </tr>
         </thead>
@@ -70,10 +71,10 @@
             ?>
                     <tr>
 
+                        <td><?php echo $data['existencia']; ?></td>
                         <td><?php echo $data['codigo']; ?></td>
                         <td><?php echo $data['descripcion']; ?></td>
                         <td><?php echo $data['precio']; ?></td>
-                        <td><?php echo $data['existencia']; ?></td>
                         <!-- <td><?php echo $estado ?></td> -->
                         <td>
                             <?php if ($data['existencia'] == 0) { ?>

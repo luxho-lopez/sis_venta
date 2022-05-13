@@ -9,15 +9,16 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_POST)) {
     $alert = "";
-    if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['correo']) || empty($_POST['usuario'])) {
+    if (empty($_POST['cargo']) || empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['correo']) || empty($_POST['usuario'])) {
         $alert = '<div class="alert alert-danger" role="alert">Todo los campos son requeridos</div>';
     } else {
         $idusuario = $_GET['id'];
+        $cargo = $_POST['cargo'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $correo = $_POST['correo'];
         $usuario = $_POST['usuario'];
-        $sql_update = mysqli_query($conexion, "UPDATE usuario SET nombre = '$nombre', apellido = '$apellido', correo = '$correo' , usuario = '$usuario' WHERE idusuario = $idusuario");
+        $sql_update = mysqli_query($conexion, "UPDATE usuario SET cargo = '$cargo', nombre = '$nombre', apellido = '$apellido', correo = '$correo' , usuario = '$usuario' WHERE idusuario = $idusuario");
         $alert = '<div class="alert alert-success" role="alert">Usuario Actualizado</div>';
     }
 }
@@ -35,6 +36,7 @@ if ($result_sql == 0) {
 } else {
     if ($data = mysqli_fetch_array($sql)) {
         $idcliente = $data['idusuario'];
+        $cargo = $data['cargo'];
         $nombre = $data['nombre'];
         $apellido = $data['apellido'];
         $correo = $data['correo'];
@@ -52,6 +54,11 @@ if ($result_sql == 0) {
                 <form class="" action="" method="post">
                     <?php echo isset($alert) ? $alert : ''; ?>
                     <input type="hidden" name="id" value="<?php echo $idusuario; ?>">
+                    <div class="form-group">
+                        <label for="cargo">Cargo</label>
+                        <input type="text" placeholder="Ingrese el cargo" class="form-control" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
+
+                    </div>
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" placeholder="Ingrese nombre" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>">

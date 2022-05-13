@@ -1,57 +1,60 @@
- <?php include_once "includes/header.php";
-    include "../conexion.php";
-    $id_user = $_SESSION['idUser'];
-    $permiso = "productos";
-    $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
-    $existe = mysqli_fetch_all($sql);
-    if (empty($existe) && $id_user != 1) {
-        header("Location: permisos.php");
-    }
-    if (!empty($_POST)) {
-        $codigo = $_POST['codigo'];
-        $producto = $_POST['producto'];
-        $precio = $_POST['precio'];
-        $cantidad = $_POST['cantidad'];
-        $usuario_id = $_SESSION['idUser'];
-        $alert = "";
-        if (empty($codigo) || empty($producto) || empty($precio) || $precio <  0 || empty($cantidad) || $cantidad < 0) {
-            $alert = '<div class="alert alert-danger" role="alert">
+<?php include_once "includes/header.php";
+include "../conexion.php";
+$id_user = $_SESSION['idUser'];
+$permiso = "productos";
+$sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
+$existe = mysqli_fetch_all($sql);
+if (empty($existe) && $id_user != 1) {
+    header("Location: permisos.php");
+}
+if (!empty($_POST)) {
+    $factura = $_POST['factura'];
+    $codigo = $_POST['codigo'];
+    $producto = $_POST['producto'];
+    $precio = $_POST['precio'];
+    $cantidad = $_POST['cantidad'];
+    $usuario_id = $_SESSION['idUser'];
+    $alert = "";
+    if (empty($factura) || empty($codigo) || empty($producto) || empty($precio) || $precio <  0 || empty($cantidad) || $cantidad < 0) {
+        $alert = '<div class="alert alert-danger" role="alert">
                 Todo los campos son obligatorios
               </div>';
-        } else {
-            $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
-            $result = mysqli_fetch_array($query);
-            if ($result > 0) {
-                $alert = '<div class="alert alert-warning" role="alert">
+    } else {
+        $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
+        $result = mysqli_fetch_array($query);
+        if ($result > 0) {
+            $alert = '<div class="alert alert-warning" role="alert">
                         El código ya existe
                     </div>';
-            } else {
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,existencia,usuario_id) values ('$codigo', '$producto', '$precio','$cantidad','$usuario_id')");
-                if ($query_insert) {
-                    $alert = '<div class="alert alert-success" role="alert">
+        } else {
+            $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,existencia,num_factura,usuario_id) values ('$codigo', '$producto', '$precio','$cantidad','$factura','$usuario_id')");
+            if ($query_insert) {
+                $alert = '<div class="alert alert-success" role="alert">
                 Producto Registrado
               </div>';
-                } else {
-                    $alert = '<div class="alert alert-danger" role="alert">
+            } else {
+                $alert = '<div class="alert alert-danger" role="alert">
                 Error al registrar el producto
               </div>';
-                }
             }
         }
     }
-    ?>
+}
+?>
 <button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fas fa-plus"></i></button>
-<a href="productos_0.php"><button class="btn btn-info mb-2" type="button" ><i class="fas fa-audio-description"></i></button></a>
+<a href="productos_0.php"><button class="btn btn-info mb-2" type="button"><i class="fas fa-audio-description"></i></button></a>
 <?php echo isset($alert) ? $alert : ''; ?>
 <div class="table-responsive">
     <table class="table table-striped table-bordered" id="tbl">
         <thead class="thead-dark">
             <tr>
                 <!-- <th>#</th> -->
+                <th></th>
                 <th>Código</th>
                 <th>Producto</th>
                 <th>Precio</th>
-                <th>Stock</th>
+                <th>Factura</th>
+                <th>Fecha</th>
                 <th>Opción</th>
             </tr>
         </thead>
@@ -71,10 +74,12 @@
             ?>
                     <tr>
 
+                        <td><?php echo $data['existencia']; ?></td>
                         <td><?php echo $data['codigo']; ?></td>
                         <td><?php echo $data['descripcion']; ?></td>
                         <td><?php echo $data['precio']; ?></td>
-                        <td><?php echo $data['existencia']; ?></td>
+                        <td><?php echo $data['num_factura']; ?></td>
+                        <td><?php echo $data['created_at']; ?></td>
                         <!-- <td><?php echo $estado ?></td> -->
                         <td>
                             <?php if ($data['existencia'] != 0) { ?>
@@ -107,8 +112,12 @@
                 <form action="" method="post" autocomplete="off">
                     <?php echo isset($alert) ? $alert : ''; ?>
                     <div class="form-group">
-                        <label for="codigo">Modelo</label>
-                        <input type="text" placeholder="Ingrese modelo del producto" name="codigo" id="codigo" class="form-control">
+                        <label for="factura">Factura</label>
+                        <input type="text" placeholder="Numero de factura" name="factura" id="factura" class="form-control" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="codigo">Código</label>
+                        <input type="text" placeholder="Ingrese código del producto" name="codigo" id="codigo" class="form-control" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="producto">Producto</label>
