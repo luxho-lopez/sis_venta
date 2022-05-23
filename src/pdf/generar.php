@@ -12,7 +12,7 @@ $config = mysqli_query($conexion, "SELECT * FROM configuracion");
 $datos = mysqli_fetch_assoc($config);
 $clientes = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idcliente");
 $datosC = mysqli_fetch_assoc($clientes);
-$ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM detalle_venta d INNER JOIN producto p ON d.id_producto = p.codproducto WHERE d.id_venta = $id");
+$ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion, p.codigo FROM detalle_venta d INNER JOIN producto p ON d.id_producto = p.codproducto WHERE d.id_venta = $id");
 $pdf->Cell(195, 35, utf8_decode($datos['nombre']), 0, 1, 'C');
 $pdf->Image("../../assets/img/logo1.png", 10, 5, 50, 30, 'PNG');
 $pdf->SetFont('Arial', 'B', 10);
@@ -33,9 +33,9 @@ $pdf->Ln();
 // DATOS DEL CLIENTE
 
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->SetFillColor(0, 0, 0);
-$pdf->SetTextColor(255, 255, 255);
-$pdf->Cell(196, 5, "Datos del cliente", 1, 1, 'C', 1);
+$pdf->SetFillColor(102, 184, 106);
+$pdf->SetTextColor(0, 0, 0);
+$pdf->Cell(196, 6, "Datos del cliente", 1, 1, 'C', 1);
 
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(126, 5, utf8_decode('Nombre'), 0, 0);
@@ -65,25 +65,26 @@ $pdf->MultiCell(176, 5, utf8_decode($datosC['ciudad']), 0, 1);
 
 $pdf->Ln(3);
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->SetTextColor(255, 255, 255);
-$pdf->Cell(196, 5, "Detalles del Producto", 1, 1, 'C', 1);
+$pdf->SetTextColor(0, 0, 0);
+$pdf->Cell(196, 6, "Detalles del Producto", 1, 1, 'C', 1);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(14, 5, utf8_decode('N°'), 0, 0, 'L');
 $pdf->Cell(85, 5, utf8_decode('Descripción'), 0, 0, 'L');
-$pdf->Cell(25, 5, 'Serie', 0, 0, 'C');
+$pdf->Cell(25, 5, 'Codigo', 0, 0, 'C');
 $pdf->Cell(25, 5, 'Cantidad', 0, 0, 'C');
 $pdf->Cell(22, 5, 'Precio', 0, 0, 'C');
 $pdf->Cell(25, 5, 'Sub Total.', 0, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Ln(1);
 
+
 $contador = 1;
 while ($row = mysqli_fetch_assoc($ventas)) {
     $pdf->Cell(14, 5, $contador, 0, 0, 'L');
     
-    $pdf->Cell(85, 5, $row['descripcion'], 1, 0, 'L' );
+    $pdf->Cell(85, 5, $row['descripcion'], 0, 0, 'L' );
     // En este van los numero de series. le puce cantidad para que no muestre error
-    $pdf->Cell(25, 5, $row['cantidad'], 1, 0, 'L' );
+    $pdf->Cell(25, 5, $row['codigo'], 1, 0, 'L' );
     
     $pdf->Cell(25, 5, $row['cantidad'], 0, 0, 'C');
     $pdf->Cell(22, 5, $row['precio'], 0, 0, 'R');

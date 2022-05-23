@@ -28,7 +28,7 @@ if (empty($_SESSION['active'])) {
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto">
             <a style="font-size: small; text-transform: uppercase; color: #D9D8D9; margin-top: 10px">
-                <?php echo $_SESSION['nombre']; ?> <?php echo $_SESSION['apellido']; ?>
+                <?php echo $_SESSION['nombre'];?> <?php echo $_SESSION['apellido'];?>
             </a>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>

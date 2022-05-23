@@ -52,6 +52,7 @@
                 <th>Código</th>
                 <th>Producto</th>
                 <th>Precio</th>
+                <th>Factura</th>
                 <th>Opción</th>
             </tr>
         </thead>
@@ -75,6 +76,7 @@
                         <td><?php echo $data['codigo']; ?></td>
                         <td><?php echo $data['descripcion']; ?></td>
                         <td><?php echo $data['precio']; ?></td>
+                        <td><?php echo $data['num_factura']; ?></td>
                         <!-- <td><?php echo $estado ?></td> -->
                         <td>
                             <?php if ($data['existencia'] == 0) { ?>
