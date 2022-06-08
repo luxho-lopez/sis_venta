@@ -8,10 +8,14 @@ if (empty($existe) && $id_user != 1) {
     header("Location: permisos.php");
 }
 if (!empty($_POST)) {
+    $iva = 1.16;
+    $chaz = 0.86;
     $factura = $_POST['factura'];
     $codigo = $_POST['codigo'];
     $producto = $_POST['producto'];
     $precio = $_POST['precio'];
+    $precio_iva = $precio * $iva;
+    $precio_chaz = $precio_iva / $chaz;
     $cantidad = $_POST['cantidad'];
     $usuario_id = $_SESSION['idUser'];
     $alert = "";
@@ -27,7 +31,7 @@ if (!empty($_POST)) {
                         El código ya existe
                     </div>';
         } else {
-            $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,existencia,num_factura,usuario_id) values ('$codigo', '$producto', '$precio','$cantidad','$factura','$usuario_id')");
+            $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precio_iva,precio_chaz,existencia,num_factura,usuario_id) values ('$codigo', '$producto', '$precio', '$precio_iva', '$precio_chaz','$cantidad','$factura','$usuario_id')");
             if ($query_insert) {
                 $alert = '<div class="alert alert-success" role="alert">
                 Producto Registrado
@@ -77,7 +81,7 @@ if (!empty($_POST)) {
                         <td><?php echo $data['existencia']; ?></td>
                         <td><?php echo $data['codigo']; ?></td>
                         <td><?php echo $data['descripcion']; ?></td>
-                        <td><?php echo $data['precio']; ?></td>
+                        <td><?php echo $data['precio_chaz']; ?></td>
                         <td><?php echo $data['num_factura']; ?></td>
                         <td><?php echo $data['created_at']; ?></td>
                         <!-- <td><?php echo $estado ?></td> -->
@@ -124,8 +128,8 @@ if (!empty($_POST)) {
                         <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="precio">Precio</label>
-                        <input type="text" placeholder="Ingrese precio" class="form-control" name="precio" id="precio">
+                        <label for="precio">Precio de compra</label>
+                        <input type="text" placeholder="Ingrese precio de la factura" class="form-control" name="precio" id="precio">
                     </div>
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>

@@ -67,7 +67,7 @@ if (empty($_REQUEST['id'])) {
             <input type="text" placeholder="Numero de factura" name="factura" id="factura" class="form-control" value="<?php echo $data_producto['num_factura']; ?>">
           </div>
           <div class="form-group">
-            <label for="codigo">Códelo</label>
+            <label for="codigo">Código</label>
             <input type="text" placeholder="Ingrese modelo del producto" name="codigo" id="codigo" class="form-control" value="<?php echo $data_producto['codigo']; ?>">
           </div>
           <div class="form-group">

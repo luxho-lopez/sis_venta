@@ -9,7 +9,7 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_POST)) {
     $alert = "";
-    if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['telefono']) || empty($_POST['direccion']) || empty($_POST['colonia']) || empty($_POST['ciudad'])) {
+    if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['direccion']) || empty($_POST['colonia']) || empty($_POST['ciudad'])) {
         $alert = '<div class="alert alert-danger" role="alert">Todo los campos son requeridos</div>';
     } else {
         $idcliente = $_POST['id'];
