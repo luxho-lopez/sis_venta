@@ -19,13 +19,28 @@ if (!empty($_POST)) {
         $direccion = $_POST['direccion'];
         $colonia = $_POST['colonia'];
         $ciudad = $_POST['ciudad'];
-            $sql_update = mysqli_query($conexion, "UPDATE cliente SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', direccion = '$direccion', colonia = '$colonia', ciudad = '$ciudad' WHERE idcliente = $idcliente");
+        $area = $_POST['area'];
+        $ayuntamiento = $_POST['ayuntamiento'];
 
-            if ($sql_update) {
-                $alert = '<div class="alert alert-success" role="alert">Cliente Actualizado correctamente</div>';
-            } else {
-                $alert = '<div class="alert alert-danger" role="alert">Error al Actualizar el Cliente</div>';
-            }
+        $nom_archivo = $_FILES['inverso']['name'];
+        $temp_archivo = $_FILES['inverso']['tmp_name'];
+        $ruta = "../assets/img/ce_cliente".$nom_archivo;
+
+        move_uploaded_file($temp_archivo,$ruta);
+
+        // $nom_archivo2 = $_FILES['reverso']['name'];
+        // $temp_archivo2 = $_FILES['reverso']['tmp_name'];
+        // $ruta = "../assets/img/ce_cliente".$nom_archivo2;
+
+        // move_uploaded_file($temp_archivo2,$ruta);
+
+        $sql_update = mysqli_query($conexion, "UPDATE cliente SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', direccion = '$direccion', colonia = '$colonia', ciudad = '$ciudad', idarea = '$area', idayuntamiento = '$ayuntamiento', ce_inverso = '$nom_archivo' WHERE idcliente = $idcliente");
+
+        if ($sql_update) {
+            $alert = '<div class="alert alert-success" role="alert">Cliente Actualizado correctamente</div>';
+        } else {
+            $alert = '<div class="alert alert-danger" role="alert">Error al Actualizar el Cliente</div>';
+        }
     }
 }
 // Mostrar Datos
@@ -47,6 +62,11 @@ if ($result_sql == 0) {
         $direccion = $data['direccion'];
         $colonia = $data['colonia'];
         $ciudad = $data['ciudad'];
+        $area = $data['idarea'];
+        $ayuntamiento = $data['idayuntamiento'];
+        $inverso = $data['ce_inverso'];
+        // $reverso = $data['ce_reverso'];
+
     }
 }
 ?>
@@ -87,6 +107,22 @@ if ($result_sql == 0) {
                             <label for="ciudad">Ciudad</label>
                             <input type="text" placeholder="Ingrese ciudad" name="ciudad" class="form-control" id="ciudad" value="<?php echo $ciudad; ?>">
                         </div>
+                        <div class="form-group">
+                            <label for="area">Area de trabajo</label>
+                            <input type="text" placeholder="Ingrese Área de Trabajo" name="area" class="form-control" id="area" value="<?php echo $area; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="ayuntamiento">Ayuntamiento</label>
+                            <input type="text" placeholder="Ingrese Ayuntamiento" name="ayuntamiento" class="form-control" id="ayuntamiento" value="<?php echo $ayuntamiento; ?>">
+                        </div>
+
+                        <label class="form-group" for="inverso">Identificacion Oficial - Inverso
+                            <input type="file" class="form-control" id="inverso" name="inverso" multiple>
+                        </label>
+                        <!-- <label class="form-group" for="reverso">Identificacion Oficial - Reverso
+                            <input type="file" class="form-control" id="reverso" name="reverso" multiple>
+                        </label> -->
+
                         <button type="submit" class="btn btn-primary"><i class="fas fa-user-edit"></i> Editar Cliente</button>
                         <a href="clientes.php" class="btn btn-danger">Atras</a>
                     </form>
