@@ -21,19 +21,11 @@ if (!empty($_POST)) {
         $ciudad = $_POST['ciudad'];
         $area = $_POST['area'];
         $ayuntamiento = $_POST['ayuntamiento'];
-
-        $nom_archivo = $_FILES['inverso']['name'];
-        $temp_archivo = $_FILES['inverso']['tmp_name'];
-        $ruta = "../assets/img/ce_cliente".$nom_archivo;
+        $nom_archivo = $_FILES['archivo']['name'];
+        $temp_archivo = $_FILES['archivo']['tmp_name'];
+        $ruta = "../assets/img/".$nom_archivo;
 
         move_uploaded_file($temp_archivo,$ruta);
-
-        // $nom_archivo2 = $_FILES['reverso']['name'];
-        // $temp_archivo2 = $_FILES['reverso']['tmp_name'];
-        // $ruta = "../assets/img/ce_cliente".$nom_archivo2;
-
-        // move_uploaded_file($temp_archivo2,$ruta);
-
         $sql_update = mysqli_query($conexion, "UPDATE cliente SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', direccion = '$direccion', colonia = '$colonia', ciudad = '$ciudad', idarea = '$area', idayuntamiento = '$ayuntamiento', ce_inverso = '$nom_archivo' WHERE idcliente = $idcliente");
 
         if ($sql_update) {
@@ -116,8 +108,8 @@ if ($result_sql == 0) {
                             <input type="text" placeholder="Ingrese Ayuntamiento" name="ayuntamiento" class="form-control" id="ayuntamiento" value="<?php echo $ayuntamiento; ?>">
                         </div>
 
-                        <label class="form-group" for="inverso">Identificacion Oficial - Inverso
-                            <input type="file" class="form-control" id="inverso" name="inverso" multiple>
+                        <label class="form-group" for="archivo">Identificacion Oficial - Inverso
+                            <input type="file" class="form-control" id="archivo" name="archivo" multiple>
                         </label>
                         <!-- <label class="form-group" for="reverso">Identificacion Oficial - Reverso
                             <input type="file" class="form-control" id="reverso" name="reverso" multiple>
