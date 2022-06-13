@@ -9,7 +9,7 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_POST)) {
     $alert = "";
-    if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['direccion']) || empty($_POST['colonia']) || empty($_POST['ciudad'])) {
+    if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['direccion']) || empty($_POST['colonia']) || empty($_POST['ciudad'])  || empty($_FILES['archivo'])) {
         $alert = '<div class="alert alert-danger" role="alert">Todo los campos son requeridos</div>';
     } else {
         $idcliente = $_POST['id'];
@@ -24,8 +24,9 @@ if (!empty($_POST)) {
         $nom_archivo = $_FILES['archivo']['name'];
         $temp_archivo = $_FILES['archivo']['tmp_name'];
         $ruta = "../assets/img/".$nom_archivo;
-
+    
         move_uploaded_file($temp_archivo,$ruta);
+
         $sql_update = mysqli_query($conexion, "UPDATE cliente SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', direccion = '$direccion', colonia = '$colonia', ciudad = '$ciudad', idarea = '$area', idayuntamiento = '$ayuntamiento', ce_inverso = '$nom_archivo' WHERE idcliente = $idcliente");
 
         if ($sql_update) {

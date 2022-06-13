@@ -39,11 +39,11 @@ if (!empty($_POST)) {
 // Validar producto
 
 if (empty($_REQUEST['id'])) {
-  header("Location: marca.php");
+  header("Location: marcas.php");
 } else {
   $id_marca = $_REQUEST['id'];
   if (!is_numeric($id_marca)) {
-    header("Location: marca.php");
+    header("Location: marcas.php");
   }
   $query_marca = mysqli_query($conexion, "SELECT * FROM marcas WHERE id_marca = $id_marca");
   $result_marca = mysqli_num_rows($query_marca);
@@ -51,7 +51,7 @@ if (empty($_REQUEST['id'])) {
   if ($result_marca > 0) {
     $data_marca = mysqli_fetch_assoc($query_marca);
   } else {
-    header("Location: marca.php");
+    header("Location: marcas.php");
   }
 }
 ?>
@@ -75,7 +75,7 @@ if (empty($_REQUEST['id'])) {
           </label>
           <br>
           <input type="submit" value="Actualizar Marca" class="btn btn-primary">
-          <a href="marca.php" class="btn btn-danger">Atras</a>
+          <a href="marcas.php" class="btn btn-danger">Atras</a>
         </form>
       </div>
     </div>
